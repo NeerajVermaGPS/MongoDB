@@ -7,10 +7,10 @@ Here is a guide I have prepared for MongoDB Basics. Feel free to provide your va
 
 ### Connect to MongoDB:
 
-1. **Install** MongoDB Compass, CLI, Database Tools
+1. **Install** MongoDB Compass, Shell, Database Tools [<img src="https://www.svgrepo.com/show/430941/external-link.svg" height="15">](#downloading-links)
 2. **Add PATH** for Database tools similar to this: `"C:\Program Files\MongoDB\Tools\100\bin"`
 3. **Start the MongoDB Database server** in Task Manager Services
-4. **Run ```mongosh```** in your command prompt
+4. **Run ```mongosh```** in your command prompt or terminal
 
 
 ### Database Operations:
@@ -84,6 +84,148 @@ Exports the data from cl_name collection of db_name to file_name.json in followi
     Sample Output: [View](https://github.com/NeerajVermaGPS/MongoDB/blob/master/Resources/export_array.json)
 
 
+### Comparision Operators:
+
+- **Syntax**: 
+    ```javascript
+    db.cl_name.find({'parameter': { $operator: value }})
+    ```
+
+1. **$eq**: Return the data that is equals to given value.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $eq: 133 }})
+    ```
+
+2. **$ne**: Return the data that is not equals to given value.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $ne: 133 }})
+    ```
+
+3. **$gt**: Return the data that is greater than given value.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $gt: 133 }})
+    ```
+
+4. **$gte**: Return the data that is greater than or equals to given value.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $gte: 133 }})
+    ```
+
+5. **$lt**: Return the data that is less than given value.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $lt: 133 }})
+    ```
+
+6. **$lte**: Return the data that is less than or equals to given value.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $lte: 133 }})
+    ```
+
+7. **$in**: Return the data that is equals to any value in given list.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $in: [101, 133] }})
+    ```
+
+8. **$nin**: Return the data that is not equals to any value in given list.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $nin: [101, 133] }})
+    ```
+
+
+### Cursor Methods:
+
+1. **count()**: Returns count of total documents received as result of find query.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $gt: 200 }}).count()
+    ```
+
+2. **limit(n)**: Returns first `n` documents out of the total documents received as result of find query.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $gt: 200 }}).limit(5)
+    ```
+
+3. **skip(n)**: Skips the first `n` documents and returns remaining documents received as result of find query.
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $gt: 200 }}).limit(10).skip(2)
+    ```
+
+4. **sort({'parameter': a})**: Returns documents in sorted order based on field 'parameter'(`a = 1` for ascending order and `a = -1` for descending order).
+**Example:**
+
+    ```javascript
+    db.products.find({'price': { $gt: 200 }}).limit(10).sort({'price': 1})
+    ```
+
+
+### Logical Operator:
+
+1. **and**: Returns document for which all conditions are true.
+**Example:**
+
+    ```javascript
+    db.products.find({$and: [{'price': { $gt: 133 }}, {'name': { $eq: 'Smart Watch' }}]})
+    ```
+    OR
+
+    ```javascript
+    db.products.find('price': { $gt: 133 }, 'name': { $eq: 'Smart Watch' })
+    ```
+
+2. **or**: Returns documents for which any of condition is true.
+**Example:**
+
+    ```javascript
+    db.products.find({$or: [{'price': { $gt: 133 }}, {'name': { $eq: 'Smart Watch' }}]})
+    ```
+
+3. **nor**: Returns documents for which none of the conditions are true.
+**Example:**
+
+    ```javascript
+    db.products.find({$nor: [{'price': { $gt: 133 }}, {'name': { $eq: 'Smart Watch' }}]})
+    ```
+
+4. **not**:
+**Example:**
+
+    ```javascript
+    db.products.find({'price': {$not: { $eq: 133 }}})
+    ```
+
+### Expression operator:
+
+- **expr**: Used to get documents based on conditions using complex calculative exressions.
+**Examples:**
+
+    ```javascript
+    db.sales.find({$expr: {$gt: [$add: ['$price', '$quantity'], '$targetPrice']}})
+    db.sales.find({$expr: {$gt: [$subtract: ['$price', '$quantity'], '$targetPrice']}})
+    db.sales.find({$expr: {$gt: [$multiply: ['$price', '$quantity'], '$targetPrice']}})
+    db.sales.find({$expr: {$gt: [$divide: ['$price', '$quantity'], '$targetPrice']}})
+    ```
+
 ---
 ### Some Additional Points:
 
@@ -108,6 +250,14 @@ Exports the data from cl_name collection of db_name to file_name.json in followi
 
 1. [MongoDB official documentation](https://www.mongodb.com/docs/manual/)
 2. [Read about MongoDB Architecture](https://www.mongodb.com/lp/resources/products/fundamentals/mongodb-architecture-guide)
+
+
+### Downloading Links:
+Download the `msi` packages from following links:
+
+1. MongoDB Compass: https://www.mongodb.com/try/download/compass
+2. MongoDB Shell: https://www.mongodb.com/try/download/shell
+3. MongoDB CL Database Tools: https://www.mongodb.com/try/download/database-tools
 
 ### Happy Coding!
 **Visit my portfolio: [https://neerajvermagps.infinityfreeapp.com/](https://neerajvermagps.infinityfreeapp.com/)**
